@@ -1,32 +1,6 @@
 package com.wrapper.spotify;
 
-import com.wrapper.spotify.models.Album;
-import com.wrapper.spotify.models.AlbumType;
-import com.wrapper.spotify.models.Artist;
-import com.wrapper.spotify.models.AuthorizationCodeCredentials;
-import com.wrapper.spotify.models.ClientCredentials;
-import com.wrapper.spotify.models.Copyright;
-import com.wrapper.spotify.models.ExternalIds;
-import com.wrapper.spotify.models.ExternalUrls;
-import com.wrapper.spotify.models.FeaturedPlaylists;
-import com.wrapper.spotify.models.Followers;
-import com.wrapper.spotify.models.Image;
-import com.wrapper.spotify.models.LibraryTrack;
-import com.wrapper.spotify.models.NewReleases;
-import com.wrapper.spotify.models.Page;
-import com.wrapper.spotify.models.Playlist;
-import com.wrapper.spotify.models.PlaylistTrack;
-import com.wrapper.spotify.models.PlaylistTracksInformation;
-import com.wrapper.spotify.models.Product;
-import com.wrapper.spotify.models.RefreshAccessTokenCredentials;
-import com.wrapper.spotify.models.SimpleAlbum;
-import com.wrapper.spotify.models.SimpleArtist;
-import com.wrapper.spotify.models.SimplePlaylist;
-import com.wrapper.spotify.models.SimpleTrack;
-import com.wrapper.spotify.models.SnapshotResult;
-import com.wrapper.spotify.models.SpotifyEntityType;
-import com.wrapper.spotify.models.Track;
-import com.wrapper.spotify.models.User;
+import com.wrapper.spotify.models.*;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONException;
@@ -684,5 +658,39 @@ public class JsonUtil {
     SnapshotResult result = new SnapshotResult();
     result.setSnapshotId(jsonObject.getString("snapshot_id"));
     return result;
+  }
+
+  public static List<Device> createDevices(String json) {
+    return createDevices(JSONObject.fromObject(json));
+  }
+
+  public static List<Device> createDevices(JSONObject jsonObject) {
+    List<Device> returnedDevices = new ArrayList<Device>();
+    JSONArray devicesObject = jsonObject.getJSONArray("devices");
+    for (int i = 0; i < devicesObject.size(); i++) {
+      returnedDevices.add(createDevice(devicesObject.getJSONObject(i)));
+    }
+    return returnedDevices;
+  }
+
+  public static Device createDevice(String deviceJson) {
+    return createDevice(JSONObject.fromObject(deviceJson));
+  }
+
+  public static Device createDevice(JSONObject deviceJson) {
+    if (deviceJson == null || deviceJson.isNullObject()) {
+      return null;
+    }
+
+    final Device device = new Device();
+
+    device.setId(deviceJson.getString("id"));
+    device.setActive(deviceJson.getBoolean("is_active"));
+    device.setRestricted(deviceJson.getBoolean("is_restricted"));
+    device.setName(deviceJson.getString("name"));
+    device.setType(deviceJson.getString("type"));
+    device.setVolumePercent(deviceJson.getInt("volume_percent"));
+
+    return device;
   }
 }

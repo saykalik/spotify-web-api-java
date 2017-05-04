@@ -437,6 +437,30 @@ public class Api {
   }
 
   /**
+   * Get a users available devices.
+   * @return A builder object that can be used to build a request to get the user's available devices.
+   */
+  public AvailableDevicesRequest.Builder getAvailableDevices() {
+    // TODO : write test
+    final AvailableDevicesRequest.Builder builder = AvailableDevicesRequest.builder();
+    setDefaults(builder);
+    builder.path("/v1/me/player/devices");
+    return builder;
+  }
+
+  /**
+   * Pause the user's playback.
+   * @return A builder object that can be used to pause the user's playback.
+   */
+  public PauseUserPlaybackRequest.Builder pauseUserPlayback() {
+    // TODO : write test
+    final PauseUserPlaybackRequest.Builder builder = PauseUserPlaybackRequest.builder();
+    setDefaults(builder);
+    builder.path("/v1/me/player/pause");
+    return builder;
+  }
+
+  /**
    * Retrieve a URL where the user can give the application permissions.
    * @param scopes The scopes corresponding to the permissions the application needs
    * @param state state A parameter that you can use to maintain a value between the request
