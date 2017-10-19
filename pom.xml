@@ -5,15 +5,15 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>se.michaelthelin.spotify</groupId>
+    <groupId>com.saykali.spotify</groupId>
     <artifactId>spotify-web-api-java</artifactId>
-    <version>1.7.1</version>
+    <version>1.0.2</version>
 
     <packaging>jar</packaging>
 
     <name>Spotify Web API Java Client</name>
     <description>A Java client for Spotify's Web API</description>
-    <url>https://github.com/thelinmichael/spotify-web-api-java</url>
+    <url>https://github.com/saykalik/spotify-web-api-java</url>
 
     <licenses>
         <license>
@@ -24,40 +24,71 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/thelinmichael/spotify-web-api-java</url>
-        <connection>scm:git:git://github.com/thelinmichael/spotify-web-api-java.git</connection>
-        <developerConnection>scm:git:git@github.com:thelinmichael/spotify-web-api-java.git</developerConnection>
+        <url>https://github.com/saykalik/spotify-web-api-java</url>
+        <connection>scm:git:git://github.com/saykalik/spotify-web-api-java.git</connection>
+        <developerConnection>scm:git:git@github.com:saykalik/spotify-web-api-java.git</developerConnection>
     </scm>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <developers>
         <developer>
-            <name>Michael Thelin</name>
-            <email>thelinmichael@gmail.com</email>
-            <organization>Michael Thelin</organization>
-            <organizationUrl>https://github.com/thelinmichael</organizationUrl>
+            <name>Kamil Saykali</name>
+            <email>saykalik@gmail.com</email>
+            <organization>Kamil Saykali</organization>
+            <organizationUrl>https://github.com/saykalik</organizationUrl>
         </developer>
     </developers>
 
+    <!--<distributionManagement>-->
+        <!--<snapshotRepository>-->
+            <!--<id>ossrh</id>-->
+            <!--<url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
+        <!--</snapshotRepository>-->
+    <!--</distributionManagement>-->
+
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
+        <repository>
+            <id>cad14da6a2ac</id>
+            <name>cad14da6a2ac-releases</name>
+            <url>http://192.168.10.203:8001/artifactory/libs-release-local</url>
+        </repository>
     </distributionManagement>
+
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.3</version>
-                <extensions>true</extensions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.2</version>
                 <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.15</version>
+                <configuration>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                </configuration>
+            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.sonatype.plugins</groupId>-->
+                <!--<artifactId>nexus-staging-maven-plugin</artifactId>-->
+                <!--<version>1.6.3</version>-->
+                <!--<extensions>true</extensions>-->
+                <!--<configuration>-->
+                    <!--<serverId>cad14da6a2ac</serverId>-->
+                    <!--<nexusUrl>http://192.168.10.203:8001/artifactory/libs-release-local/</nexusUrl>-->
+                    <!--<autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
@@ -87,22 +118,22 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <failOnError>false</failOnError>
-                </configuration>
-                <version>2.9.1</version>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-javadoc-plugin</artifactId>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>attach-javadocs</id>-->
+                        <!--<goals>-->
+                            <!--<goal>jar</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<failOnError>false</failOnError>-->
+                <!--</configuration>-->
+                <!--<version>2.9.1</version>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 

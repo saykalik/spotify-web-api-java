@@ -461,6 +461,19 @@ public class Api {
   }
 
   /**
+   * Change the user's playback device.
+   * @return A builder object that can be used to change the user's playback device.
+   */
+  public ChangePlayerRequest.Builder changePlayer(String deviceId) {
+    // TODO : write test
+    final ChangePlayerRequest.Builder builder = ChangePlayerRequest.builder();
+    setDefaults(builder);
+    builder.device(deviceId);
+    builder.path("/v1/me/player");
+    return builder;
+  }
+
+  /**
    * Retrieve a URL where the user can give the application permissions.
    * @param scopes The scopes corresponding to the permissions the application needs
    * @param state state A parameter that you can use to maintain a value between the request
